@@ -1,0 +1,342 @@
+{
+    "breakfasts": {
+        "1": {
+            "name": "Scrambled Eggs with Avocado Toast",
+            "description": "Creamy scrambled eggs served with toast topped with mashed avocado, garnished with chili flakes and parsley.",
+            "price": "$8.99",
+            "img": ""
+        },
+        "2": {
+            "name": "Pancakes with Maple Syrup and Berries",
+            "description": "Fluffy pancakes stacked high, topped with fresh berries, whipped cream, and a drizzle of maple syrup.",
+            "price": "$7.49",
+            "img": ""
+        },
+        "3": {
+            "name": "Classic French Toast with Powdered Sugar",
+            "description": "Golden, crispy French toast dusted with powdered sugar and served with syrup and a side of fresh fruit.",
+            "price": "$6.50",
+            "img": ""
+        },
+        "4": {
+            "name": "Oatmeal with Honey, Nuts, and Berries",
+            "description": "Warm oatmeal topped with honey, crunchy nuts, and fresh berries for a healthy, filling breakfast.",
+            "price": "$5.99",
+            "img": ""
+        },
+        "5": {
+            "name": "Eggs Benedict",
+            "description": "Poached eggs on an English muffin with Canadian bacon, smothered in hollandaise sauce.",
+            "price": "$12.00",
+            "img": ""
+        },
+        "6": {
+            "name": "Smoothie Bowl with Granola",
+            "description": "A thick smoothie bowl topped with granola, fresh fruit, and a drizzle of honey or peanut butter.",
+            "price": "$9.00",
+            "img": ""
+        },
+        "7": {
+            "name": "Breakfast Burrito",
+            "description": "A tortilla filled with scrambled eggs, cheese, avocado, and salsa, perfect for a quick breakfast on the go.",
+            "price": "$7.49",
+            "img": ""
+        },
+        "8": {
+            "name": "Chia Pudding with Almonds and Coconut",
+            "description": "Creamy chia pudding topped with toasted almonds, shredded coconut, and fresh berries.",
+            "price": "$6.00",
+            "img": ""
+        },
+        "9": {
+            "name": "Bagel with Cream Cheese and Smoked Salmon",
+            "description": "A toasted bagel with creamy cheese and topped with smoked salmon, capers, and onions.",
+            "price": "$10.00",
+            "img": ""
+        },
+        "10": {
+            "name": "Acai Bowl",
+            "description": "A frozen acai berry smoothie bowl topped with granola, fresh fruits, and coconut flakes.",
+            "price": "$8.50",
+            "img": ""
+        },
+        "11": {
+            "name": "Cinnamon Roll with Icing",
+            "description": "Warm, gooey cinnamon rolls drizzled with sweet icing and served fresh from the oven.",
+            "price": "$4.99",
+            "img": ""
+        }
+    },
+    "lunchs": {
+        "1": {
+            "name": "Grilled Chicken Caesar Salad",
+            "description": "Crisp romaine lettuce, grilled chicken breast, parmesan cheese, croutons, and Caesar dressing.",
+            "price": "$12.50",
+            "img": ""
+        },
+        "2": {
+            "name": "Veggie and Hummus Wrap",
+            "description": "A whole-wheat tortilla filled with fresh veggies like lettuce, cucumber, tomatoes, carrots, and hummus.",
+            "price": "$9.00",
+            "img": ""
+        },
+        "3": {
+            "name": "Quinoa Salad with Roasted Vegetables",
+            "description": "A healthy salad with quinoa, roasted veggies, and a lemon vinaigrette dressing.",
+            "price": "$10.00",
+            "img": ""
+        },
+        "4": {
+            "name": "Turkey Club Sandwich",
+            "description": "A triple-decker sandwich with turkey, bacon, lettuce, tomato, and mayo, served on toasted bread.",
+            "price": "$11.50",
+            "img": ""
+        },
+        "5": {
+            "name": "Veggie Burger with Sweet Potato Fries",
+            "description": "A hearty plant-based veggie patty with lettuce, tomato, and pickles on a toasted bun, served with crispy sweet potato fries.",
+            "price": "$13.00",
+            "img": ""
+        },
+        "6": {
+            "name": "Spaghetti Carbonara",
+            "description": "A creamy pasta with crispy pancetta, eggs, parmesan, and black pepper.",
+            "price": "$14.00",
+            "img": ""
+        },
+        "7": {
+            "name": "Tuna Salad Sandwich",
+            "description": "A classic tuna salad on whole grain bread with lettuce and tomato.",
+            "price": "$8.50",
+            "img": ""
+        },
+        "8": {
+            "name": "Chicken Wrap with Avocado",
+            "description": "A grilled chicken wrap with fresh avocado, lettuce, tomatoes, and a creamy dressing.",
+            "price": "$9.50",
+            "img": ""
+        },
+        "9": {
+            "name": "Caprese Salad with Mozzarella and Balsamic",
+            "description": "Fresh mozzarella, tomatoes, basil, drizzled with balsamic glaze and olive oil.",
+            "price": "$7.99",
+            "img": ""
+        },
+        "10": {
+            "name": "Chicken and Rice Burrito",
+            "description": "A burrito filled with grilled chicken, seasoned rice, beans, and salsa, wrapped in a flour tortilla.",
+            "price": "$8.00",
+            "img": ""
+        },
+        "11": {
+            "name": "Minestrone Soup with Garlic Bread",
+            "description": "A hearty vegetable soup with pasta and beans, served with warm garlic bread.",
+            "price": "$6.99",
+            "img": ""
+        }
+    },
+    "dinners": {
+        "1": {
+            "name": "Grilled Salmon with Asparagus",
+            "description": "Fresh salmon fillet grilled and served with sautéed asparagus and a squeeze of lemon.",
+            "price": "$18.00",
+            "img": ""
+        },
+        "2": {
+            "name": "Spaghetti Aglio e Olio",
+            "description": "Simple pasta with garlic, olive oil, chili flakes, and a sprinkle of parsley.",
+            "price": "$14.99",
+            "img": ""
+        },
+        "3": {
+            "name": "Beef Stir Fry with Veggies",
+            "description": "Tender strips of beef stir-fried with bell peppers, broccoli, and onions, served with rice.",
+            "price": "$15.50",
+            "img": ""
+        },
+        "4": {
+            "name": "Vegetable Lasagna",
+            "description": "Layers of pasta, ricotta cheese, spinach, zucchini, and marinara sauce, baked to perfection.",
+            "price": "$14.00",
+            "img": ""
+        },
+        "5": {
+            "name": "Chicken Parmesan",
+            "description": "Breaded chicken breasts topped with marinara sauce and melted mozzarella, served with pasta.",
+            "price": "$16.50",
+            "img": ""
+        },
+        "6": {
+            "name": "Grilled Vegetable Skewers with Rice",
+            "description": "A mix of zucchini, mushrooms, bell peppers, and onions grilled and served with jasmine rice.",
+            "price": "$12.00",
+            "img": ""
+        },
+        "7": {
+            "name": "Pork Tenderloin with Mashed Potatoes",
+            "description": "Tender pork roast served with creamy mashed potatoes and steamed green beans.",
+            "price": "$18.50",
+            "img": ""
+        },
+        "8": {
+            "name": "Chicken Stir-Fry with Cashews",
+            "description": "Chicken stir-fried with vegetables and cashew nuts in a savory sauce, served with rice.",
+            "price": "$15.00",
+            "img": ""
+        },
+        "9": {
+            "name": "Vegetarian Tacos",
+            "description": "Soft tortillas filled with seasoned beans, guacamole, lettuce, and salsa.",
+            "price": "$10.00",
+            "img": ""
+        },
+        "10": {
+            "name": "Shrimp Scampi",
+            "description": "Shrimp sautéed in garlic butter sauce, served over pasta with a sprinkle of parmesan.",
+            "price": "$17.00",
+            "img": ""
+        },
+        "11": {
+            "name": "Beef Tacos with Sour Cream",
+            "description": "Ground beef seasoned with taco spices, served in soft tortillas with sour cream, cheese, and lettuce.",
+            "price": "$12.00",
+            "img": ""
+        }
+    },
+    "desserts": {
+        "1": {
+            "name": "Chocolate Lava Cake",
+            "description": "A rich chocolate cake with a molten center, served with vanilla ice cream.",
+            "price": "$6.99",
+            "img": ""
+        },
+        "2": {
+            "name": "Fruit Tart with Custard Filling",
+            "description": "A buttery tart shell filled with smooth vanilla custard and topped with fresh fruit.",
+            "price": "$5.50",
+            "img": ""
+        },
+        "3": {
+            "name": "Cheesecake with Raspberry Sauce",
+            "description": "Creamy cheesecake on a graham cracker crust, topped with a tangy raspberry sauce.",
+            "price": "$7.99",
+            "img": ""
+        },
+        "4": {
+            "name": "Tiramisu",
+            "description": "Layers of espresso-soaked ladyfingers and mascarpone cream, dusted with cocoa powder.",
+            "price": "$6.00",
+            "img": ""
+        },
+        "5": {
+            "name": "Apple Pie with Vanilla Ice Cream",
+            "description": "Classic apple pie with a flaky crust, served with a scoop of vanilla ice cream.",
+            "price": "$5.00",
+            "img": ""
+        },
+        "6": {
+            "name": "Lemon Meringue Pie",
+            "description": "A tart lemon filling topped with fluffy meringue, served in a flaky pie crust.",
+            "price": "$6.50",
+            "img": ""
+        },
+        "7": {
+            "name": "Chocolate Mousse",
+            "description": "Rich, creamy chocolate mousse served with a dollop of whipped cream.",
+            "price": "$5.50",
+            "img": ""
+        },
+        "8": {
+            "name": "Coconut Macaroons",
+            "description": "Sweet coconut cookies, crisp on the outside and chewy inside.",
+            "price": "$3.99",
+            "img": ""
+        },
+        "9": {
+            "name": "Carrot Cake with Cream Cheese Frosting",
+            "description": "Moist carrot cake topped with smooth cream cheese frosting and a sprinkle of walnuts.",
+            "price": "$6.50",
+            "img": ""
+        },
+        "10": {
+            "name": "Panna Cotta with Berries",
+            "description": "A creamy Italian dessert topped with fresh mixed berries and a raspberry coulis.",
+            "price": "$5.00",
+            "img": ""
+        },
+        "11": {
+            "name": "Chocolate Chip Cookies",
+            "description": "Soft and chewy cookies with melted chocolate chips throughout.",
+            "price": "$4.00",
+            "img": ""
+        }
+    },
+    "drinks": {
+        "1": {
+            "name": "Iced Coffee",
+            "description": "Cold brew coffee served over ice, topped with a splash of milk or cream.",
+            "price": "$3.50",
+            "img": ""
+        },
+        "2": {
+            "name": "Strawberry Smoothie",
+            "description": "A refreshing blend of strawberries, banana, yogurt, and a touch of honey.",
+            "price": "$4.50",
+            "img": ""
+        },
+        "3": {
+            "name": "Mojito Mocktail",
+            "description": "A minty lime soda with fresh mint leaves, lime wedges, and a splash of soda water.",
+            "price": "$4.99",
+            "img": ""
+        },
+        "4": {
+            "name": "Classic Lemonade",
+            "description": "Freshly squeezed lemons, sugar, and water served chilled with ice cubes.",
+            "price": "$2.99",
+            "img": ""
+        },
+        "5": {
+            "name": "Hot Chocolate",
+            "description": "Creamy hot chocolate topped with whipped cream and a sprinkle of cocoa powder.",
+            "price": "$3.99",
+            "img": ""
+        },
+        "6": {
+            "name": "Matcha Latte",
+            "description": "A smooth blend of matcha green tea powder, milk, and a touch of sweetness.",
+            "price": "$4.50",
+            "img": ""
+        },
+        "7": {
+            "name": "Chai Tea Latte",
+            "description": "A spiced tea blend with steamed milk and a hint of cinnamon.",
+            "price": "$3.99",
+            "img": ""
+        },
+        "8": {
+            "name": "Fresh Orange Juice",
+            "description": "100% freshly squeezed oranges served chilled.",
+            "price": "$3.00",
+            "img": ""
+        },
+        "9": {
+            "name": "Berry Iced Tea",
+            "description": "Iced tea infused with mixed berries and served with a sprig of mint.",
+            "price": "$3.50",
+            "img": ""
+        },
+        "10": {
+            "name": "Pineapple Coconut Cooler",
+            "description": "A tropical blend of pineapple juice, coconut water, and a splash of lime.",
+            "price": "$4.00",
+            "img": ""
+        },
+        "11": {
+            "name": "Espresso",
+            "description": "A rich and bold shot of espresso, perfect for a quick caffeine boost.",
+            "price": "$2.50",
+            "img": ""
+        }
+    }
+}
