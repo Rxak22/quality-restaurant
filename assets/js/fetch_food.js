@@ -116,7 +116,6 @@ function appenddModalChild(name, description, img, price) {
     return child;
 }
 
-var count  = 1;
 function appendOrderModalChild(name, price){
     var child = `
         <div class="row mt-4 ml-3 form-group">
@@ -125,9 +124,9 @@ function appendOrderModalChild(name, price){
                     </div>
                     <div class="col-lg-6 mb-3 mb-lg-0 d-flex justify-content-between">
                       <div>
-                        <strong class="cursor-pointer">+</strong>
-                        <span class="px-2">x${count}</span>
-                        <strong class="ms-5 cursor-pointer">-</strong>
+                        <strong class="cursor-pointer increase">+</strong>
+                        <span class="px-2">x<span class="count">1</span></span>
+                        <strong class="ms-5 cursor-pointer decrease">-</strong>
                       </div>
                       <p class="text-danger font-weight-bold">$${price}</p>
                     </div>
@@ -270,11 +269,39 @@ $('document').ready( () => {
         $('#orderOnline').modal('show');
 
         let name = $(this).data('name');
-        let price = $(this).data('price');
+        let price = parseFloat($(this).data('price'));
         
+        $('.totalPrice').text(price.toFixed(2));
         $('.item-wrapper').html(appendOrderModalChild(name, price));
 
     })
+
+    const calculateTotalPrice = (qty, price) => qty * price;
+
+    function updateTotalPrice (totalPrice) {
+        $('.totalPrice').text(totalPrice.toFixed(2));
+    }
+
+    $('.item-wrapper').on('click', '.increase', function () {
+        const count = $(this).siblings('span').find('.count');
+        let currentCount = parseFloat(count.text());
+
+        count.text(currentCount + 1);
+
+        const price = parseFloat($('.totalPrice').text()) / currentCount;
+        updateTotalPrice(calculateTotalPrice(currentCount + 1,  price));
+    })    
+    $('.item-wrapper').on('click', '.decrease', function () {
+        const count = $(this).siblings('span').find('.count');
+        let currentCount = parseFloat(count.text());
+
+        if (currentCount > 1) {
+            count.text(currentCount - 1);
+
+            const price = parseFloat($('.totalPrice').text()) / currentCount;
+        updateTotalPrice(calculateTotalPrice(currentCount - 1,  price));
+        }
+    })    
 // handle add menu item
     $('.more-food').click(function () {
             $(this).css('display', 'none');
@@ -288,7 +315,16 @@ $('document').ready( () => {
         $('.select-menu').next('.select2-container').hide();
 
         let selected = $('.select-menu').val(); 
-        console.log(selected);
+        $.map(selected, function (value) {
+            let lastCommaIndnex = value.lastIndexOf(','); 
+            
+            let name = value.substring(0, lastCommaIndnex).trim();
+            let price = parseFloat(value.substring(lastCommaIndnex +1)); 
+            $('.item-wrapper').append(appendOrderModalChild(name, price));
+
+            let totalPrice = parseFloat($('.totalPrice').text()) + price;
+            updateTotalPrice(totalPrice);
+        });
     });
 
     function appendSelectMenu(menu, target) {
@@ -296,7 +332,7 @@ $('document').ready( () => {
             
             $(`.${target}`).append(
                 `
-                      <option value="${key}">${value.name}</option>
+                      <option value="${[value.name, value.price]}">${value.name}</option>
                 `
             )
         });
