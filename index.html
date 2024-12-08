@@ -10,6 +10,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- select2 link  -->
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
   <!-- ===============================================-->
   <!--    Document Title-->
@@ -397,34 +399,73 @@
     <div class="modal fade" id="foodItemModel" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content modal-content-menu border-0">
-          <!-- <div class="modal-body"><button class="close" type="button" data-dismiss="modal" aria-label="Close"><span
-                aria-hidden="true">×</span></button>
+          <!-- add modal body from jquery -->
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="orderOnline" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content border-0">
+          <div class="bg-holder rounded-soft"
+            style="background-image:url(assets/img/food/pngfind.png);background-size:40%;background-position:top right; transform:none;">
+          </div>
+          <!--/.bg-holder-->
+          <form class="zform modal-body pb-0"><button class="close" type="button" data-dismiss="modal"
+              aria-label="Close"><span aria-hidden="true">×</span></button>
             <div class="row">
               <div class="border border-primary border-2x ml-5 rounded-soft"></div>
-              <div class="col-10">
-                <p class="fs-2 font-weight-bold text-uppercase lh-3 mt-3">Bagel with<br />Cream Cheese</p>
+              <div class="col-8">
+                <h5 class="font-weight-bold mt-2">Make An<br>Order</h5>
               </div>
             </div>
-            <div class="row mt-4">
-              <div class="col-md-8 col-7 pl-0"><img class="img-fluid" src="assets/img/food/breakfast/1.jpg" alt=""
-                  style="margin-left: -1px" /></div>
-              <div class="col-md-4 col-5 border-left border-200 border-2x h-50">
-                <ul class="list-unstyled text-500">
-                  <li>Bagel</li>
-                  <li>Cream Cheese</li>
-                  <li>Dusted Sugar</li>
-                </ul>
+            <div class="mt-4 ml-3 form-group item-wrapper">
+              <!-- append modal child from jquery  -->
+            </div>
+            <div class="row ml-3 form-group">
+              <div class="col-lg-9">
+                  <select class="select-menu" style="width: 100%; display: none;" name="states[]" multiple="multiple">
+                    <optgroup class="breakfast-group" label="Breakfast"></optgroup>
+                    <optgroup class="lunch-group" label="Lunch"></optgroup>
+                    <optgroup class="breakfast-group" label="Dinner"></optgroup>
+                    <optgroup class="dessert-group" label="Dessert"></optgroup>
+                    <optgroup class="drink-group" label="Drink"></optgroup>
+                  </select>
+              </div>
+              <div class="col-lg-3 d-flex justify-content-end">
+                <p class="cursor-pointer more-food justify-content-center" style="width: 80px; display: flex;">more food?</p>
+                <p class="cursor-pointer add-select justify-content-center btn btn-warning" style="width: 80px; height: 33px; display: none;">Add</p>
               </div>
             </div>
-            <div class="row justify-content-center bg-light">
-              <div class="col-10 pt-3">
-                <p>A bagel and cream cheese (also known as bagel with cream cheese) is a common food pairing in American
-                  cuisine, consisting in its basic form of an open-faced sandwich.</p>
+            <div class="row form-group ml-3">
+              <div class="col-lg-6 mb-3 mb-lg-0"><input class="form-control" type="text" placeholder="Name"></div>
+              <div class="col-lg-6"><input class="form-control" type="tel" placeholder="Phone"></div>
+            </div>
+            <div class="row form-group ml-3">
+              <div class="col"><input class="form-control" type="text" placeholder="Address"></div>
+            </div>
+            <div class="row form-group ml-3">
+              <h6>Payment Method</h6>
+              <div class="form-check col-12">
+                <label class="form-check-label cursor-pointer">
+                  <input type="radio" class="form-check-input" name="payment" id="" value="checkedValue">
+                  Visa Card 
+                </label><br>
+                <label class="form-check-label cursor-pointer">
+                  <input type="radio" class="form-check-input" name="payment" id="" value="checkedValue">
+                  Cash by delivery
+                </label>
               </div>
             </div>
-            <div class="modal-footer justify-content-center"><button class="btn btn-primary btn-block text-center"
-                type="button">order online</button></div>
-          </div> -->
+            <div class="row justify-content-center bg-dark rounded-bottom"
+              style="margin-left:-17px;margin-right:-17px;margin-bottom:-1px">
+              <div class="col-10 pt-2 pb-3 d-flex justify-content-between align-items-center">
+                <strong class="font-weight-bold">Total: <span class="text-danger font-weight-bold">$50.50</span></strong>
+                <button class="btn btn-light text-center mt-2" type="button">Order Now</button>
+              </div>
+            </div>
+            <div class="zform-feedback"></div>
+          </form>
         </div>
       </div>
     </div>
@@ -570,7 +611,7 @@
                 <div class="overflow-hidden">
                   <div class="overflow-hidden"><img class="mb-2 img-fluid rounded-circle" src="assets/img/team/1.jpg"
                       alt="" />
-                    <p class="font-weight-bold mb-0">Kha Marryrath</p>
+                    <p class="font-weight-bold mb-0">Kha Marryrat</p>
                     <p class="fs--1">Owner &amp; Founder</p>
                   </div>
                 </div>
@@ -769,10 +810,10 @@
                       class="fas fa-star"></span><span class="fas fa-star"></span><span class="fas fa-star"></span>
                   </div>
                 </div>
-                <p>The moon too beautiful 🌒, But you're more than the moon my spacial cush 'RCHNA'.
+                <p>The moon too beautiful 🌒, But you're more than the moon my spacial crush 'RCHNA'.
                   I hope one day i can holding your hand and sit at the beach look at to the sunset 🧑‍🤝‍🧑🌇
                 </p>
-                <p class="fs-1 font-weight-bold">-Kha Maryrath</p>
+                <p class="fs-1 font-weight-bold">-Kha Marryrat</p>
               </div>
               <div class="item">
                 <div class="row mb-2">
@@ -886,6 +927,8 @@
   <script src="assets/lib/flexslider/jquery.flexslider-min.js"></script>
   <script src="assets/js/theme.js"></script>
   <script src="assets/js/fetch_food.js"></script>
+  <!-- select2 script  -->
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 </body>
 
 </html>
