@@ -118,17 +118,17 @@ function appenddModalChild(name, description, img, price) {
 
 function appendOrderModalChild(name, price){
     var child = `
-        <div class="row mt-4 ml-3 form-group">
-                    <div class="col-lg-6 mb-3 mb-lg-0">
+        <div class="item row p-0 mt-1 ml-3 form-group hover">
+                    <div class="col-lg-6 mb-1 mb-lg-0">
                       <h6>${name}</h6>
                     </div>
-                    <div class="col-lg-6 mb-3 mb-lg-0 d-flex justify-content-between">
+                    <div class="col-lg-6 mb-1 mb-lg-0 d-flex justify-content-between">
                       <div>
                         <strong class="cursor-pointer increase">+</strong>
                         <span class="px-2">x<span class="count">1</span></span>
                         <strong class="ms-5 cursor-pointer decrease">-</strong>
                       </div>
-                      <p class="text-danger font-weight-bold">$${price}</p>
+                      <p class="text-danger font-weight-bolde">$<span class="item-price">${price.toFixed(2)}</span></p>
                     </div>
               </div>
     `;
@@ -145,6 +145,18 @@ function splitText(text) {
     }
     else 
         return [words];
+}
+
+function updateTotalPrice () {
+    let totalPrice = 0;
+
+    $('.item-wrapper .item').each(function () {
+        let price = parseFloat($(this).find('.item-price').text());
+        let qty = parseInt($(this).find('.count').text());
+
+        totalPrice += qty * price;
+    })
+    $('.totalPrice').text(totalPrice.toFixed(2));
 }
 
 $('document').ready( () => {
@@ -264,9 +276,14 @@ $('document').ready( () => {
     
     })
 
+    // stop scrolling 
+    $('#foodItemModel').on('show.bs.modal', function () {
+        $('body').css('overflow', 'hidden');
+    })
+
     $('.modal-content-menu').on('click', '.btn-order', function () {
         $('#foodItemModel').modal('hide');
-        $('#orderOnline').modal('show');
+        $('#orderOnline').modal('show')
 
         let name = $(this).data('name');
         let price = parseFloat($(this).data('price'));
@@ -275,33 +292,11 @@ $('document').ready( () => {
         $('.item-wrapper').html(appendOrderModalChild(name, price));
 
     })
+    // stop scrolling 
+    $('#orderOnline').on('hidden.bs.modal', function () {
+        $('body').css('overflow', 'auto');
+    })
 
-    const calculateTotalPrice = (qty, price) => qty * price;
-
-    function updateTotalPrice (totalPrice) {
-        $('.totalPrice').text(totalPrice.toFixed(2));
-    }
-
-    $('.item-wrapper').on('click', '.increase', function () {
-        const count = $(this).siblings('span').find('.count');
-        let currentCount = parseFloat(count.text());
-
-        count.text(currentCount + 1);
-
-        const price = parseFloat($('.totalPrice').text()) / currentCount;
-        updateTotalPrice(calculateTotalPrice(currentCount + 1,  price));
-    })    
-    $('.item-wrapper').on('click', '.decrease', function () {
-        const count = $(this).siblings('span').find('.count');
-        let currentCount = parseFloat(count.text());
-
-        if (currentCount > 1) {
-            count.text(currentCount - 1);
-
-            const price = parseFloat($('.totalPrice').text()) / currentCount;
-        updateTotalPrice(calculateTotalPrice(currentCount - 1,  price));
-        }
-    })    
 // handle add menu item
     $('.more-food').click(function () {
             $(this).css('display', 'none');
@@ -317,27 +312,98 @@ $('document').ready( () => {
         let selected = $('.select-menu').val(); 
         $.map(selected, function (value) {
             let lastCommaIndnex = value.lastIndexOf(','); 
-            
             let name = value.substring(0, lastCommaIndnex).trim();
-            let price = parseFloat(value.substring(lastCommaIndnex +1)); 
-            $('.item-wrapper').append(appendOrderModalChild(name, price));
+            let price = parseFloat(value.substring(lastCommaIndnex +1).trim()); 
 
-            let totalPrice = parseFloat($('.totalPrice').text()) + price;
-            updateTotalPrice(totalPrice);
+            $('.item-wrapper').append(appendOrderModalChild(name, price));
         });
+
+        updateTotalPrice();
     });
+
+    $('.item-wrapper').on('click', '.increase', function () {
+        const count = $(this).siblings('span').find('.count');
+        let currentCount = parseInt(count.text());
+
+        count.text(currentCount + 1);
+
+        updateTotalPrice();
+    })    
+    $('.item-wrapper').on('click', '.decrease', function () {
+        const count = $(this).siblings('span').find('.count');
+        let currentCount = parseInt(count.text());
+
+        if (currentCount > 1) {
+            count.text(currentCount - 1);
+
+            updateTotalPrice();
+        }
+    })  
+    
+    $('.order-now').click(function () {
+        if ($('.name').val() != '' && $('.phone').val() != '' && $('.adress').val() != ''){
+            toastr["success"]("we will call to you when your food is arrived. thanks!", "Your order has send.")
+
+            toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": true,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+            }
+
+            $('.name').val() = "";
+            $('.phone').val() = "";
+            $('.address').val() = "";
+
+            $('#orderOnline').modal('hidden')
+        } else {
+            toastr["warning"]("please fill ll field.", "Order fialed")
+
+            toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": true,
+            "progressBar": true,
+            "positionClass": "toast-top-center",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+            }
+        }
+      })
 
     function appendSelectMenu(menu, target) {
         $.each(menu, function (key, value) { 
             
             $(`.${target}`).append(
                 `
-                      <option value="${[value.name, value.price]}">${value.name}</option>
+                      <option value="${[value.name, value.price]}">${value.name} $${value.price}</option>
                 `
             )
         });
     }
-    $('.select-menu').select2();
+    $('.select-menu').select2({
+        placeholder: "Select the food you need.",
+        allowClear: true,
+    });
     $('.select-menu').next('.select2-container').hide()
 
     appendSelectMenu(menu.breakfasts, "breakfast-group");
@@ -345,4 +411,197 @@ $('document').ready( () => {
     appendSelectMenu(menu.dinners, "dinner-group");
     appendSelectMenu(menu.desserts, "dessert-group");
     appendSelectMenu(menu.drinks, "drink-group");
+
+
+    // order everywhere else
+    function updateTotalPriceEverywhere () {
+        let totalPrice = 0;
+    
+        $('.item-wrapper-everywhere .item-everywhere').each(function () {
+            let price = parseFloat($(this).find('.item-price-everywhere').text());
+            let qty = parseInt($(this).find('.count-everywhere').text());
+    
+            totalPrice += qty * price;
+        })
+        $('.totalPrice-everywhere').text(totalPrice.toFixed(2));
+    }
+
+    function appendOrderModalChildEverywhere(name, price){
+        var child = `
+            <div class="item-everywhere row p-0 mt-1 ml-3 form-group hover">
+                        <div class="col-lg-6 mb-1 mb-lg-0">
+                          <h6>${name}</h6>
+                        </div>
+                        <div class="col-lg-6 mb-1 mb-lg-0 d-flex justify-content-between">
+                          <div>
+                            <strong class="cursor-pointer increase-everywhere">+</strong>
+                            <span class="px-2">x<span class="count-everywhere">1</span></span>
+                            <strong class="ms-5 cursor-pointer decrease-everywhere">-</strong>
+                          </div>
+                          <p class="text-danger font-weight-bolde">$<span class="item-price-everywhere">${price.toFixed(2)}</span></p>
+                        </div>
+                  </div>
+        `;
+        return child;
+    }
+    $('.select-menu-everywhere').select2({
+        placeholder: "Select the food you need.",
+        allowClear: true,
+    });
+    $('.btn-everywhere').click(function (){
+        $('.select-menu-everywhere').next('.select2-container').show()
+
+        // stop scrolling 
+        $('#everywhereOrder').on('show.bs.modal', function () {
+            $('body').css('overflow', 'hidden');
+        })
+        $('#everywhereOrder').on('hidden.bs.modal', function () {
+            $('body').css('overflow', 'auto');
+        })
+
+        $('.add-select-everywhere').click(function (){
+            $(this).css('display', 'none');
+            $('.more-food-everywhere').css('display', 'flex');
+            $('.select-menu-everywhere').next('.select2-container').hide()
+
+            let selected = $('.select-menu-everywhere').val(); 
+            $.map(selected, function (value) {
+                let lastCommaIndnex = value.lastIndexOf(','); 
+                let name = value.substring(0, lastCommaIndnex).trim();
+                let price = parseFloat(value.substring(lastCommaIndnex +1).trim()); 
+
+                $('.item-wrapper-everywhere').append(appendOrderModalChildEverywhere(name, price));
+            });
+
+            updateTotalPriceEverywhere();
+        })
+
+        $('.item-wrapper-everywhere').on('click', '.increase-everywhere', function () {
+            const count = $(this).siblings('span').find('.count-everywhere');
+            let currentCount = parseInt(count.text());
+    
+            count.text(currentCount + 1);
+    
+            updateTotalPriceEverywhere();
+        })    
+        $('.item-wrapper-everywhere').on('click', '.decrease-everywhere', function () {
+            const count = $(this).siblings('span').find('.count-everywhere');
+            let currentCount = parseInt(count.text());
+    
+            if (currentCount > 1) {
+                count.text(currentCount - 1);
+    
+                updateTotalPriceEverywhere();
+            }
+        })
+
+        $('.more-food-everywhere').click(function () {
+            $(this).css('display', 'none');
+            $('.add-select-everywhere').css('display', 'flex');
+            $('.select-menu-everywhere').next('.select2-container').show()
+          })
+
+
+        $('.order-now-everywhere').click(function () {
+            if ($('.name-everywhere').val() != '' && $('.phone-everywhere').val() != '' && $('.adress-everywhere').val() != ''){
+                toastr["success"]("we will call to you when your food is arrived. thanks!", "Your order has send.")
+
+                toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "newestOnTop": true,
+                "progressBar": true,
+                "positionClass": "toast-top-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+                }
+
+                $('.name-everywhere').val() = "";
+                $('.phone-everywhere').val() = "";
+                $('.address-everywhere').val() = "";
+
+                $('#everywhereOrder').modal('hidden')
+            } else {
+                toastr["warning"]("please fill ll field.", "Order fialed")
+
+                toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "newestOnTop": true,
+                "progressBar": true,
+                "positionClass": "toast-top-center",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+                }
+            }
+          })
+    })
+    // enable scrolling 
+    $('body').css('overflow', 'auto');
+
+    // feedback 
+    $('.feedback').click(function () {
+        if ($('.feedback-name').val() != '' && $('.feedback-subject').val() != '' && $('.feedback-email').val() != '' && $('.feedback-text').val() != '') {
+            toastr["success"]("thank for pay your attention to us.", "Your request send.")
+
+                toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "newestOnTop": true,
+                "progressBar": true,
+                "positionClass": "toast-top-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+                } 
+
+                $('.feedback-name').val("")
+                $('.feedback-subject').val("")
+                $('.feedback-email').val("")
+                $('.feedback-text').val("")
+        } else {
+            toastr["warning"]("please fill ll field.", "Your request fialed")
+
+            toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": true,
+            "progressBar": true,
+            "positionClass": "toast-top-center",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+            }
+        }
+    })
 })

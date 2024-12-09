@@ -40,7 +40,34 @@
   <link href="assets/lib/fancy-tab/fancy-tab.css" rel="stylesheet">
   <link href="assets/lib/flexslider/flexslider.css" rel="stylesheet">
   <link href="assets/css/theme.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/toastr.min.css">
 </head>
+
+<style>
+  .hover {
+    transition: all 0.2s ease-in-out;
+    padding-top: 10px;
+  }
+  .hover:hover {
+    cursor: pointer;
+    background-color: rgba(116, 116, 116, 0.103);
+  }
+
+  .item-wrapper {
+    max-height: 185px;
+    overflow: hidden;
+    overflow-y: scroll;
+    scrollbar-color: rgba(240, 166, 28, 0.861) rgba(199, 199, 199, 0.542);
+    scrollbar-width: thin;
+  }
+  .item-wrapper-everywhere {
+    max-height: 185px;
+    overflow: hidden;
+    overflow-y: scroll;
+    scrollbar-color: rgba(240, 166, 28, 0.861) rgba(199, 199, 199, 0.542);
+    scrollbar-width: thin;
+  }
+</style>
 
 <body>
   <!-- ===============================================-->
@@ -166,6 +193,7 @@
         </div>
       </div>
     </div>
+    
     <div class="flexslider border-0 overflow-hidden rounded-0 mb-0">
       <ul class="slides overflow-hidden">
         <li data-zanim-timeline="{&quot;delay&quot;:0}" data-zanim-trigger="scroll">
@@ -210,8 +238,8 @@
                     Apparently, we had reached a great height in the atmosphere, for the sky was a dead black, and which
                     lifts the horizon of the sea to the level of the spectator on a hillside.</p>
                 </div>
-                <div class="overflow-hidden"><button class="btn btn-primary rounded mt-3 mr-3"
-                    data-zanim-xs='{"animation":"default","delay":0.7,"duration":1.5}'>Order <span
+                <div class="overflow-hidden"><button class="btn btn-primary rounded mt-3 mr-3 btn-everywhere"
+                    data-zanim-xs='{"animation":"default","delay":0.7,"duration":1.5}' data-toggle="modal" data-target="#everywhereOrder">Order <span
                       class="d-none d-lg-inline">online</span></button><a class="btn btn-outline-primary mt-3"
                     href="#contact" data-fancyscroll="data-fancyscroll" data-offset="90"
                     data-zanim-xs='{"animation":"default","delay":0.7,"duration":1.5}'><span
@@ -248,7 +276,7 @@
                       a modern contemporary twist.</p>
                   </div>
                   <div class="overflow-hidden"><button class="btn btn-primary mt-3"
-                      data-zanim-xs='{"animation":"","delay":0.3,"duration":2}'>Book now</button></div>
+                      data-zanim-xs='{"animation":"","delay":0.3,"duration":2}' data-toggle="modal" data-target="#reservation">Book now</button></div>
                 </div>
                 <div class="col-md-6 mt-6"><img class="img-fluid" src="assets/img/food/buger.png" alt=""
                     data-zanim-xs='{"animation":"zoom-in","duration":1.5}' /></div>
@@ -404,6 +432,7 @@
       </div>
     </div>
 
+    <!-- click order at menu list  -->
     <div class="modal fade" id="orderOnline" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content border-0">
@@ -419,12 +448,13 @@
                 <h5 class="font-weight-bold mt-2">Make An<br>Order</h5>
               </div>
             </div>
-            <div class="mt-4 ml-3 form-group item-wrapper">
+            <div class="mt-4 ml-3 form-group item-wrapper p-0">
               <!-- append modal child from jquery  -->
             </div>
             <div class="row ml-3 form-group">
               <div class="col-lg-9">
                   <select class="select-menu" style="width: 100%; display: none;" name="states[]" multiple="multiple">
+                    <option></option>
                     <optgroup class="breakfast-group" label="Breakfast"></optgroup>
                     <optgroup class="lunch-group" label="Lunch"></optgroup>
                     <optgroup class="breakfast-group" label="Dinner"></optgroup>
@@ -433,26 +463,26 @@
                   </select>
               </div>
               <div class="col-lg-3 d-flex justify-content-end">
-                <p class="cursor-pointer more-food justify-content-center" style="width: 80px; display: flex;">more food?</p>
+                <p class="cursor-pointer more-food justify-content-center" style="width: 85px; display: flex;">more food?</p>
                 <p class="cursor-pointer add-select justify-content-center btn btn-warning" style="width: 80px; height: 33px; display: none;">Add</p>
               </div>
             </div>
             <div class="row form-group ml-3">
-              <div class="col-lg-6 mb-3 mb-lg-0"><input class="form-control" type="text" placeholder="Name"></div>
-              <div class="col-lg-6"><input class="form-control" type="tel" placeholder="Phone"></div>
+              <div class="col-lg-6 mb-3 mb-lg-0"><input class="form-control name" type="text" required placeholder="Name"></div>
+              <div class="col-lg-6"><input class="form-control phone" type="tel" required placeholder="Phone"></div>
             </div>
             <div class="row form-group ml-3">
-              <div class="col"><input class="form-control" type="text" placeholder="Address"></div>
+              <div class="col"><input class="form-control address" type="text" required placeholder="Address"></div>
             </div>
             <div class="row form-group ml-3">
-              <h6>Payment Method</h6>
+              <h6>Pay with:</h6>
               <div class="form-check col-12">
                 <label class="form-check-label cursor-pointer">
                   <input type="radio" class="form-check-input" name="payment" id="" value="checkedValue">
                   Visa Card 
                 </label><br>
                 <label class="form-check-label cursor-pointer">
-                  <input type="radio" class="form-check-input" name="payment" id="" value="checkedValue">
+                  <input type="radio" class="form-check-input" name="payment" id="" value="checkedValue" checked>
                   Cash by delivery
                 </label>
               </div>
@@ -461,7 +491,74 @@
               style="margin-left:-17px;margin-right:-17px;margin-bottom:-1px">
               <div class="col-10 pt-2 pb-3 d-flex justify-content-between align-items-center">
                 <strong class="font-weight-bold">Total: <span class="text-danger font-weight-bold">$<span class="totalPrice"></span></span></strong>
-                <button class="btn btn-light text-center mt-2" type="button">Order Now</button>
+                <button class="btn btn-light text-center mt-2 order-now" type="button">Order Now</button>
+              </div>
+            </div>
+            <div class="zform-feedback"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- click order everwhere else -->
+    <div class="modal fade" id="everywhereOrder" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content border-0">
+          <div class="bg-holder rounded-soft"
+            style="background-image:url(assets/img/food/pngfind.png);background-size:40%;background-position:top right; transform:none;">
+          </div>
+          <!--/.bg-holder-->
+          <form class="zform modal-body pb-0"><button class="close" type="button" data-dismiss="modal"
+              aria-label="Close"><span aria-hidden="true">×</span></button>
+            <div class="row">
+              <div class="border border-primary border-2x ml-5 rounded-soft"></div>
+              <div class="col-8">
+                <h5 class="font-weight-bold mt-2">Make An<br>Order</h5>
+              </div>
+            </div>
+            <div class="mt-4 ml-3 form-group item-wrapper-everywhere p-0">
+              <!-- append modal child from jquery  -->
+            </div>
+            <div class="row ml-3 form-group">
+              <div class="col-lg-9">
+                  <select required class="select-menu-everywhere" style="width: 100%; display: none;" name="states[]" multiple="multiple">
+                    <option></option>
+                    <optgroup class="breakfast-group" label="Breakfast"></optgroup>
+                    <optgroup class="lunch-group" label="Lunch"></optgroup>
+                    <optgroup class="breakfast-group" label="Dinner"></optgroup>
+                    <optgroup class="dessert-group" label="Dessert"></optgroup>
+                    <optgroup class="drink-group" label="Drink"></optgroup>
+                  </select>
+              </div>
+              <div class="col-lg-3 d-flex justify-content-end">
+                <p class="cursor-pointer more-food-everywhere justify-content-center" style="width: 85px; display: none;">more food?</p>
+                <p class="cursor-pointer add-select-everywhere justify-content-center btn btn-warning" style="width: 80px; height: 33px; display: flex;">Add</p>
+              </div>
+            </div>
+            <div class="row form-group ml-3">
+              <div class="col-lg-6 mb-3 mb-lg-0"><input class="form-control name-everywhere" type="text" placeholder="Name" required></div>
+              <div class="col-lg-6"><input class="form-control phone-everywhere" type="tel" placeholder="Phone" required></div>
+            </div>
+            <div class="row form-group ml-3">
+              <div class="col"><input class="form-control address-everywhere" type="text" placeholder="Address" required></div>
+            </div>
+            <div class="row form-group ml-3">
+              <h6>Pay with:</h6>
+              <div class="form-check col-12">
+                <label class="form-check-label cursor-pointer">
+                  <input type="radio" class="form-check-input" name="payment" id="" value="checkedValue">
+                  Visa Card 
+                </label><br>
+                <label class="form-check-label cursor-pointer">
+                  <input type="radio" class="form-check-input" name="payment" id="" value="checkedValue" checked>
+                  Cash by delivery
+                </label>
+              </div>
+            </div>
+            <div class="row justify-content-center bg-dark rounded-bottom"
+              style="margin-left:-17px;margin-right:-17px;margin-bottom:-1px">
+              <div class="col-10 pt-2 pb-3 d-flex justify-content-between align-items-center">
+                <strong class="font-weight-bold">Total: <span class="text-danger font-weight-bold">$<span class="totalPrice-everywhere">0.00</span></span></strong>
+                <button class="btn btn-light text-center mt-2 order-now-everywhere" type="button">Order Now</button>
               </div>
             </div>
             <div class="zform-feedback"></div>
@@ -482,7 +579,7 @@
           </div>
           <div class="col-lg-4 col-md-6 pb-7 ml-xl-4 ml-lg-6 text-center text-md-left">
             <P class="text-primary mb-1 font-weight-bold">Hungry?</P>
-            <h4 class="text-white">We will home deliver !</h4><button class="btn btn-primary mt-3" type="button">Make an
+            <h4 class="text-white">We will home deliver !</h4><button class="btn btn-primary mt-3 btn-everywhere" data-toggle="modal" data-target="#everywhereOrder" type="button">Make an
               order</button>
           </div>
         </div>
@@ -760,22 +857,22 @@
             <form class="zform mt-4" method="post"><input type="hidden" name="to" value="username@domain.extension" />
               <div class="row">
                 <div class="col-md">
-                  <div class="form-group"><input class="fs-0 form-control form-control-lg" type="text"
+                  <div class="form-group"><input class="fs-0 form-control form-control-lg feedback-name" type="text"
                       placeholder="Your Name" required="required" /></div>
-                  <div class="form-group"><input class="fs-0 form-control form-control-lg" type="text"
+                  <div class="form-group"><input class="fs-0 form-control form-control-lg feedback-subject" type="text"
                       placeholder="Subject" required="required" /></div>
-                  <div class="form-group"><input class="fs-0 form-control form-control-lg" type="email"
+                  <div class="form-group"><input class="fs-0 form-control form-control-lg feedback-email" type="email"
                       placeholder="Email Address" required="required" /></div>
-                  <div class="form-group">
+                  <!-- <div class="form-group">
                     <div class="custom-control custom-checkbox"><input class="custom-control-input"
                         id="sendeMeACopyCheck" type="checkbox" /><label class="custom-control-label"
                         for="sendeMeACopyCheck">Send me a copy</label></div>
-                  </div>
+                  </div> -->
                 </div>
                 <div class="col-md">
-                  <div class="form-group"><textarea class="fs-0 form-control contact-message resize-none" rows="6"
+                  <div class="form-group"><textarea class="fs-0 form-control contact-message resize-none feedback-text" rows="6"
                       placeholder="Type your message here" required="required"></textarea></div><button
-                    class="btn btn-dark" type="submit">Give us a shot</button>
+                    class="btn btn-dark feedback" type="button">Give us a shot</button>
                   <div class="zform-feedback my-2"></div>
                 </div>
               </div>
@@ -853,7 +950,7 @@
               <div class="col-md-5 col-lg-4 mb-6 mb-md-0 align-self-center"><img class="mb-1" src="assets/img/logo.png"
                   alt="" />
                 <h3 class="text-white my-3 fs-lg-2 fs-1 mb-4">Want To Taste<br />Our Food?</h3><button
-                  class="btn btn-primary" type="button">order online</button>
+                  class="btn btn-primary btn-everywhere" data-toggle="modal" data-target="#everywhereOrder" type="button">order online</button>
               </div>
               <div class="col-auto d-none d-lg-flex offset-lg-1">
                 <div class="border-left border-1000 my-5"></div>
@@ -929,6 +1026,8 @@
   <script src="assets/js/fetch_food.js"></script>
   <!-- select2 script  -->
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  <!-- toastr  -->
+   <script src="assets/js/toastr.min.js"></script>
 </body>
 
 </html>
